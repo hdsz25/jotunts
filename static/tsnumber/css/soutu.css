@@ -1,0 +1,89 @@
+h1{
+
+font-family : 微软雅黑;
+
+font-size : 6mm;
+
+color : #000000;
+        margin:0px auto;
+    text-align:center;
+    vertical-align:middle;
+}
+h2{
+
+font-family : 微软雅黑;
+
+font-size : 5mm;
+
+color : #4d36ff;
+        margin:0px auto;
+    text-align:center;
+    vertical-align:middle;
+}
+#a{
+    font-family:微软雅黑;
+    font-size : 3mm;
+    color : #0e3d73;
+    margin:0px auto;
+    text-align:right;
+    vertical-align:middle;
+}
+#header{
+    width: 100%;
+    height:50px;
+    background-color: #8e8e8e;
+    font-family : 微软雅黑;
+    font-size: 40px;
+    text-align: center;
+    color: #141b73;
+    vertical-align:middle;
+}
+#footer {
+    width: 100%;
+    height: 50px;
+    background-color: #0e3d73;
+    font-family: 微软雅黑;
+    font-size: 15px;
+    color: #b6daff;
+    align-self: center;
+    text-align:center;
+    vertical-align:text-bottom;
+}
+table{
+    margin:0px auto;
+    text-align:center;
+    vertical-align:middle;
+}
+form{
+    margin:0px auto;
+    text-align:center;
+    vertical-align:middle;
+}
+#a_small{
+    font-family: "Microsoft YaHei", "Segoe UI Light", "Segoe UI", "Heiti SC";
+    font-size: 10px;
+}
+#tr-detail{
+    width:300px;
+    height:30px;
+    background-color: #bcd8ff;
+    text-align: center;
+    /*border-color:#bcd8ff;*/
+}
+#tr-title{
+    width:300px;
+    height:30px;
+    background-color: #e8ffac;
+    text-align: center;
+    /*border:1px solid #e7ffa6;*/
+}
+body{
+    margin:10px auto;
+    text-align:right;
+    vertical-align:middle;
+}
+#no-answer{
+    margin:0px auto;
+    text-align:center;
+    vertical-align:middle;
+}

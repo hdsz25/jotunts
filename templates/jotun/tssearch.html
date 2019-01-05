@@ -1,0 +1,53 @@
+{% extends "jotun/base.html" %}
+{% block main %}
+{#    <h1>Jotun TSS信息列表</h1>#}
+    <h2>欢迎:{{ username }}  </h2>
+    <a id="a"> 登录 </a>
+    <a id="a" href="{% url "tsinfo:quit" %}">退出 </a>
+    <form action="{% url 'tsinfo:search' %}" method="post">
+        {% csrf_token %}
+           关键词：<input type="text" name="keyword" value="{{ keyword}}">
+            <input type="submit" value="查询">
+            <hr>
+    </form>
+<ul>
+        {% if error_msg %}
+            <p>{{ error_msg }}</p>
+        {% endif %}
+         <table id="details">
+                <tr id="tr-title">
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>船厂</td>
+                    <td>邮箱</td>
+                    <td>联系电话</td>
+                </tr>
+            {% for student in students %}
+                    <tr id="tr-detail">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student.chinname }}</td>
+                        <td>{{ student.shipyard }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.tel }}</td>
+                    </tr>
+            {% empty %}
+                  <div id="no-answer">
+                    没有搜索结果
+                  </div>
+            {% endfor %}
+
+         </table>
+    <table>
+        <tr>
+            {% for index in students.paginator.page_range %}
+                {% if index == students.number %}
+                    <td>{{ index }}</td>
+                {% else %}
+                    <td><a href="/tsinfo/search/{{index}}">{{ index }}</a></td>
+                {% endif %}
+            {%endfor%}
+            <td><a href="/tsinfo/search/{{pageid|add:1}}">下一页</a></td>
+        </tr>
+    </table>
+</ul>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "tsnumber/css/style.css" %}">
+    <title>Jotun TSS信息列表</title>
+</head>
+<body>
+    <h1>Jotun TSS信息列表</h1>
+    <h2>欢迎:{{ username }}</h2>
+    <a> 登录</a>
+    <a href="{% url "tsinfo:quit" %}">退出</a>
+    <form action="{% url 'tsinfo:search' %}" method="post">
+        {% csrf_token %}
+           关键词：<input type="text" name="keyword" value="{{ keyword}}">
+            <input type="submit" value="查询">
+            <hr>
+    </form>
+    <ul>
+        {% if error_msg %}
+            <p>{{ error_msg }}</p>
+        {% endif %}
+         <table class="table-bordered">
+                <tr>
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>船厂</td>
+                    <td>邮箱</td>
+                    <td>联系电话</td>
+                </tr>
+            {% for student in students %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student.chinname }}</td>
+                        <td>{{ student.shipyard }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.tel }}</td>
+                    </tr>
+            {% empty %}
+                  <div >
+                    没有搜索结果
+                  </div>
+            {% endfor %}
+         </table>
+    </ul>
+</body>
+</html>

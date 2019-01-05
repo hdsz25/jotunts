@@ -1,0 +1,30 @@
+
+{% load static from staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "tsnumber/css/style.css" %}">
+    <title>Jotun TSS查询系统！</title>
+    
+
+</head>
+<body>
+    {% comment %}
+    {% if username  %}
+        <h2>你输入的“{{ username }}”在数据库中不存在或者验证码输入错误，请正确输入！</h2>
+    {% else %}
+        <h2>请输入你的姓名后查询系统！</h2>
+    {% endif %}
+    {% endcomment %}
+    <h2>Jotun TSS查询系统登录</h2>
+    <form action="{% url "tsinfo:login" %}" method="post">
+        {% csrf_token %}
+        验证码：<input type="text" name="verify">
+        <img src="{% url "tsinfo:verify" %}">
+        用户名：<input type="text" name="username">
+        <input type="submit" value="提交">
+    </form>
+    <span>{{ flag }}</span>
+    <img src="{% static "tsnumber/jpg/3.jpg" %}">
+</body>
+</html>

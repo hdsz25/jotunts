@@ -1,0 +1,23 @@
+{% extends "jotun/base.html" %}
+{% block main %}
+<h2>Jotun TSS查询系统登录</h2>
+    <table>
+    <tr>
+        <td><form action="{% url "tsinfo:login" %}" method="post">
+        {% csrf_token %}
+        验证码：<input type="text" name="verify">
+        <img src="{% url "tsinfo:verify" %}">
+        用户名：<input type="text" name="username">
+        <input type="submit" value="提交">
+    </form>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>{{ flag }}</span>
+        </td>
+    </tr>
+    </table>
+
+
+{% endblock %}

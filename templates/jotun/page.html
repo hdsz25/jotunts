@@ -1,0 +1,83 @@
+{% extends "jotun/base.html" %}
+{% block main %}
+{#    <h1>Jotun TSS信息列表</h1>#}
+    <h2>欢迎:{{ username }}  </h2>
+    <a id="a"> 登录 </a>
+    <a id="a" href="{% url "tsinfo:quit" %}">退出 </a>
+    <table>
+        <tr>
+            <td>
+                <form action="{% url 'tsinfo:search' %}" method="post">
+                    {% csrf_token %}
+                       关键词：<input type="text" name="keyword" value="{{ keyword}}">
+                        <input type="submit" value="查询">
+{#                        <hr>#}
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a id="a_small">（显示全部请在关键字一栏输入一个空格键或者数字1！）</a>
+                <hr>
+            </td>
+        </tr>       
+        {% if error_msg %}
+        <tr>
+        <td>
+        {{error_msg}}
+        </td>
+        </tr>
+        {%endif%}
+        
+        
+
+    </table>
+<ul>
+            
+         <table id="details">
+                <tr id="tr-title">
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>船厂</td>
+                    <td>邮箱</td>
+                    <td>联系电话</td>
+                </tr>
+            {% for student in students %}
+                    {%widthratio students.number 1 10 as pagenum%}
+                    <tr id="tr-detail">
+                        <td>{{ forloop.counter|add:pagenum|add:-10 }}</td>
+                        <td>{{ student.chinname }}</td>
+                        <td>{{ student.shipyard }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.tel }}</td>
+                    </tr>
+            {% empty %}
+                  <div id="no-answer">
+                    没有搜索结果
+                  </div>
+            {% endfor %}
+
+         </table>
+    <table>
+        <tr>
+            {% if students.has_previous %}
+                <td><a href="/tsinfo/search/{{students.previous_page_number}}">上一页</a></td>
+            {% else %}
+                <td><a>上一页</a></td>
+            {% endif %}
+            {% for index in students.paginator.page_range %}
+                {% if index == students.number %}
+                    <td>{{ index }}</td>
+                {% else %}
+                    <td><a href="/tsinfo/search/{{index}}">{{ index }}</a></td>
+                {% endif %}
+            {%endfor%}
+            {% if students.has_next %}
+                <td><a href="/tsinfo/search/{{students.next_page_number}}">下一页</a></td>
+            {% else %}
+                <td><a>下一页</a></td>
+            {% endif %}
+        </tr>
+    </table>
+</ul>
+{% endblock %}
